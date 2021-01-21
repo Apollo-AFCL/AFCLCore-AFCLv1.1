@@ -180,32 +180,11 @@
         "conditions"
       ]
     },
-    "loopCounterDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "from": {
-          "type": "string"
-        },
-        "to": {
-          "type": "string"
-        },
-        "step": {
-          "type": "string"
+    "iteratorsDef": {
+      "type": "array",
+       "items": {
+       "type": "string"
         }
-      },
-      "required": [
-        "name",
-        "type",
-        "from",
-        "to"
-      ]
     },
     "atomicFunctionDef": {
       "additionalProperties": false,
@@ -428,8 +407,8 @@
             "dataLoops": {
               "$ref": "#/definitions/dataLoopsDef"
             },
-            "loopCounter": {
-              "$ref": "#/definitions/loopCounterDef"
+            "iterators": {
+              "$ref": "#/definitions/iteratorsDef"
             },
             "loopBody": {
               "$ref": "#/definitions/functionDef"
@@ -446,7 +425,7 @@
           },
           "required": [
             "name",
-            "loopCounter",
+            "iterators",
             "loopBody"
           ]
         }
@@ -549,8 +528,8 @@
             "dataIns": {
               "$ref": "#/definitions/dataInsDef"
             },
-            "loopCounter": {
-              "$ref": "#/definitions/loopCounterDef"
+            "iterators": {
+              "$ref": "#/definitions/iteratorsDef"
             },
             "loopBody": {
               "$ref": "#/definitions/functionDef"
@@ -567,7 +546,7 @@
           },
           "required": [
             "name",
-            "loopCounter",
+            "iterators",
             "loopBody"
           ]
         }

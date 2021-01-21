@@ -4,8 +4,9 @@ package at.uibk.dps.afcl.functions;
 import at.uibk.dps.afcl.Function;
 import at.uibk.dps.afcl.functions.objects.DataIns;
 import at.uibk.dps.afcl.functions.objects.DataOuts;
-import at.uibk.dps.afcl.functions.objects.LoopCounter;
 import com.fasterxml.jackson.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 @JsonPropertyOrder({
         "name",
         "dataIns",
-        "loopCounter",
+        "iterators",
         "loopBody",
         "dataOuts"
 })
@@ -28,8 +29,8 @@ public class ParallelFor extends LoopCompound {
     /**
      * Contains needed information about the number of (parallel) loop iterations
      */
-    @JsonProperty("loopCounter")
-    private LoopCounter loopCounterParallelFor;
+    @JsonProperty("iterators")
+    protected final List<String> iterators = new ArrayList<>();
 
     public ParallelFor() {
     }
@@ -43,10 +44,10 @@ public class ParallelFor extends LoopCompound {
      * @param loopBodyParallelFor    functions which should be executed in each iteration
      * @param dataOuts    Data output ports ({@link DataOuts})
      */
-    public ParallelFor(String name, List<DataIns> dataIns, LoopCounter loopCounterParallelFor, List<Function> loopBodyParallelFor, List<DataOuts> dataOuts) {
+    public ParallelFor(String name, List<DataIns> dataIns, List<String> iterators, List<Function> loopBodyParallelFor, List<DataOuts> dataOuts) {
         this.name = name;
         this.dataIns = dataIns;
-        this.loopCounterParallelFor = loopCounterParallelFor;
+        this.iterators.addAll(iterators);
         this.setLoopBody(loopBodyParallelFor);
         this.dataOuts = dataOuts;
     }
@@ -55,14 +56,9 @@ public class ParallelFor extends LoopCompound {
      * Getter and Setter
      */
 
-    @JsonProperty("loopCounter")
-    public LoopCounter getLoopCounter() {
-        return loopCounterParallelFor;
-    }
-
-    @JsonProperty("loopCounter")
-    public void setLoopCounter(LoopCounter loopCounterParallelFor) {
-        this.loopCounterParallelFor = loopCounterParallelFor;
+    @JsonProperty("iterators")
+    public List<String> getIterators() {
+        return iterators;
     }
 
     @Override
@@ -77,11 +73,11 @@ public class ParallelFor extends LoopCompound {
             return false;
         }
         ParallelFor that = (ParallelFor) o;
-        return Objects.equals(loopCounterParallelFor, that.loopCounterParallelFor);
+        return Objects.equals(iterators, that.iterators);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), loopCounterParallelFor);
+        return Objects.hash(super.hashCode(), iterators);
     }
 }
