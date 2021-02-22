@@ -1,26 +1,35 @@
 
 package at.uibk.dps.afcl.functions.objects;
 
-import at.uibk.dps.afcl.functions.IfThenElse;
 import com.fasterxml.jackson.annotation.*;
 
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This class represents the condition which should be fulfilled to execute
- * the {@link IfThenElse} then functions. If the condition is not
- * fulfilled {@link IfThenElse} else will be executed.
+ * This class represents a condition of {@link Condition}
  * @author stefanpedratscher
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "combinedWith",
-        "conditions"
+        "data1",
+        "data2",
+        "operator"
 })
 public class Condition {
+
+    /**
+     * Left operand
+     */
+    @JsonProperty("data1")
+    private String data1;
+
+    /**
+     * Right operand
+     */
+    @JsonProperty("data2")
+    private String data2;
 
     /**
      * Represents how the different conditions should be
@@ -30,10 +39,16 @@ public class Condition {
     private String combinedWith;
 
     /**
-     * List of conditions
+     * Operand (e.g. ==, contains, ...)
      */
-    @JsonProperty("conditions")
-    private List<ACondition> conditions;
+    @JsonProperty("operator")
+    private String operator;
+
+    /**
+     * Negate the condition
+     */
+    @JsonProperty("negation")
+    private String negation;
 
     /**
      * Optional additional json properties.
@@ -42,26 +57,49 @@ public class Condition {
     private final Map<String, Object> additionalProperties = new ConcurrentHashMap<>();
 
     /**
-     * Empty constructor for a condition.
+     * Default constructor.
      */
     public Condition() {
         // This constructor is intentionally empty. Nothing special is needed here.
     }
 
     /**
-     * Constructor for Condition
+     * Constructor for ACondition
      *
-     * @param combinedWith Combination of the different conditions (AND or OR)
-     * @param conditions   List of conditions
+     * @param data1    Left operand
+     * @param data2    Right operand
+     * @param operator Operand (e.g. ==, contains, ...)
      */
-    public Condition(final String combinedWith, final List<ACondition> conditions) {
+    public Condition(final String data1, final String data2, final String operator, final String combinedWith) {
+        this.data1 = data1;
+        this.data2 = data2;
+        this.operator = operator;
         this.combinedWith = combinedWith;
-        this.conditions = conditions;
     }
 
     /**
      * Getter and Setter
      */
+
+    @JsonProperty("data1")
+    public String getData1() {
+        return data1;
+    }
+
+    @JsonProperty("data1")
+    public void setData1(final String data1) {
+        this.data1 = data1;
+    }
+
+    @JsonProperty("data2")
+    public String getData2() {
+        return data2;
+    }
+
+    @JsonProperty("data2")
+    public void setData2(final String data2) {
+        this.data2 = data2;
+    }
 
     @JsonProperty("combinedWith")
     public String getCombinedWith() {
@@ -73,14 +111,24 @@ public class Condition {
         this.combinedWith = combinedWith;
     }
 
-    @JsonProperty("conditions")
-    public List<ACondition> getConditions() {
-        return conditions;
+    @JsonProperty("operator")
+    public String getOperator() {
+        return operator;
     }
 
-    @JsonProperty("conditions")
-    public void setConditions(final List<ACondition> conditions) {
-        this.conditions = conditions;
+    @JsonProperty("operator")
+    public void setOperator(final String operator) {
+        this.operator = operator;
+    }
+
+    @JsonProperty("negation")
+    public String getNegation() {
+        return negation;
+    }
+
+    @JsonProperty("negation")
+    public void setNegation(final String negation) {
+        this.negation = negation;
     }
 
     @JsonAnyGetter
@@ -107,14 +155,16 @@ public class Condition {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        final Condition condition = (Condition) object;
-        return Objects.equals(combinedWith, condition.combinedWith) &&
-                Objects.equals(conditions, condition.conditions) &&
-                Objects.equals(additionalProperties, condition.additionalProperties);
+        final Condition that = (Condition) object;
+        return Objects.equals(data1, that.data1) &&
+                Objects.equals(data2, that.data2) &&
+                Objects.equals(operator, that.operator) &&
+                Objects.equals(negation, that.negation) &&
+                Objects.equals(additionalProperties, that.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(combinedWith, conditions, additionalProperties);
+        return Objects.hash(data1, data2, operator, negation, additionalProperties);
     }
 }

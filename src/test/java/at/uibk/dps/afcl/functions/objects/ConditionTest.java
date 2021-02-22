@@ -15,37 +15,34 @@ import java.util.Collections;
  */
 public class ConditionTest {
     /**
-     * Test full construction of a condition.
+     * Test full construction of an aCondition.
      *
      * @author stefanpedratscher
      */
     @Test
     public void testFullConstruction() {
-        final ACondition aCondition = new ACondition("1", "2", "==");
+        final Condition condition = new Condition("1", "2", "==", "AND");
 
-        final Condition condition = new Condition("AND", new ArrayList<>(Collections.singleton(aCondition)));
-
-        Assert.assertEquals("AND", condition.getCombinedWith());
-
-        Assert.assertEquals(1, condition.getConditions().size());
-        Assert.assertEquals(aCondition, condition.getConditions().get(0));
-        Assert.assertEquals(aCondition.hashCode(), condition.getConditions().get(0).hashCode());
-
+        Assert.assertEquals("1", condition.getData1());
+        Assert.assertEquals("2", condition.getData2());
+        Assert.assertEquals("==", condition.getOperator());
         Assert.assertEquals(0, condition.getAdditionalProperties().size());
     }
 
     /**
-     * Test the empty construction of a condition.
+     * Test the empty construction of an aCondition.
      *
      * @author stefanpedratscher
      */
     @Test
     public void testEmptyConstruction() {
-        final Condition condition = new Condition();
+        final Condition aCondition = new Condition();
 
-        Assert.assertNull(condition.getCombinedWith());
-        Assert.assertNull(condition.getConditions());
-        Assert.assertEquals(0, condition.getAdditionalProperties().size());
+        Assert.assertNull(aCondition.getData1());
+        Assert.assertNull(aCondition.getData2());
+        Assert.assertNull(aCondition.getOperator());
+        Assert.assertNull(aCondition.getNegation());
+        Assert.assertEquals(0, aCondition.getAdditionalProperties().size());
     }
 
     /**
@@ -65,28 +62,33 @@ public class ConditionTest {
      */
     @Test
     public void testHashEquals() {
-        final ACondition aCondition = new ACondition("1", "2", "==");
+        final Condition aCondition = new Condition("1", "2", "!=", "AND");
 
-        final Condition condition = new Condition("AND", new ArrayList<>(Collections.singleton(aCondition)));
-
-        Assert.assertEquals(condition, condition);
-        Assert.assertEquals(condition.hashCode(), condition.hashCode());
-        Assert.assertNotEquals(condition, null);
+        Assert.assertEquals(aCondition, aCondition);
+        Assert.assertEquals(aCondition.hashCode(), aCondition.hashCode());
+        Assert.assertNotEquals(aCondition, null);
 
         final Compound compound = new Compound();
-        Assert.assertNotEquals(condition, compound);
+        Assert.assertNotEquals(aCondition, compound);
 
-        final Condition condition2 = new Condition("AND", new ArrayList<>(Collections.singleton(aCondition)));
-        Assert.assertEquals(condition, condition2);
-        Assert.assertEquals(condition.hashCode(), condition2.hashCode());
-        condition2.setAdditionalProperties("name", "type");
-        Assert.assertNotEquals(condition, condition2);
+        final Condition aCondition2 = new Condition("1", "2", "!=", "AND");
+        Assert.assertEquals(aCondition, aCondition2);
+        Assert.assertEquals(aCondition.hashCode(), aCondition2.hashCode());
+        aCondition2.setAdditionalProperties("name", "type");
+        Assert.assertNotEquals(aCondition, aCondition2);
 
-        Condition condition3;
-        condition3 = new Condition("OR", new ArrayList<>(Collections.singleton(aCondition)));
-        Assert.assertNotEquals(condition, condition3);
+        Condition aCondition3;
+        aCondition3 = new Condition("5", "2", "!=", "AND");
+        Assert.assertNotEquals(aCondition, aCondition3);
 
-        condition3 = new Condition("AND", new ArrayList<>(Collections.singleton(new ACondition())));
-        Assert.assertNotEquals(condition, condition3);
+        aCondition3 = new Condition("1", "5", "!=", "AND");
+        Assert.assertNotEquals(aCondition, aCondition3);
+
+        aCondition3 = new Condition("1", "2", "==", "AND");
+        Assert.assertNotEquals(aCondition, aCondition3);
+
+        aCondition3 = new Condition("1", "2", "!=", "AND");
+        aCondition3.setNegation("negation");
+        Assert.assertNotEquals(aCondition, aCondition3);
     }
 }

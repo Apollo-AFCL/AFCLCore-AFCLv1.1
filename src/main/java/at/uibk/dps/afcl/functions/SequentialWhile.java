@@ -37,7 +37,7 @@ public class SequentialWhile extends LoopCompound {
      * Contains needed information about the number of (sequential) loop iterations
      */
     @JsonProperty("condition")
-    private Condition condition;
+    private List<Condition> condition;
 
     /**
      * Default constructor.
@@ -56,7 +56,7 @@ public class SequentialWhile extends LoopCompound {
      *                                   executed in each iteration
      * @param dataOuts    Data output ports ({@link DataOuts})
      */
-    public SequentialWhile(final String name, final List<DataIns> dataIns, final List<DataLoops> dataLoops, final Condition condition,
+    public SequentialWhile(final String name, final List<DataIns> dataIns, final List<DataLoops> dataLoops, final List<Condition> condition,
                            final List<Function> loopBodySequentialWhile, final List<DataOuts> dataOuts) {
         this();
         this.name = name;
@@ -78,12 +78,12 @@ public class SequentialWhile extends LoopCompound {
     public void setDataLoops(final List<DataLoops> dataLoops) { this.dataLoops = dataLoops; }
 
     @JsonProperty("condition")
-    public Condition getCondition() {
+    public List<Condition> getCondition() {
         return condition;
     }
 
     @JsonProperty("condition")
-    public void setCondition(final Condition loopCounter) {
+    public void setCondition(final List<Condition> loopCounter) {
         this.condition = loopCounter;
     }
 

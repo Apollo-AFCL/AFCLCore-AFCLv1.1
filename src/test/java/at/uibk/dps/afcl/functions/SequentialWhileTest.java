@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Test the functionality of a sequential while test.
@@ -28,7 +30,7 @@ public class SequentialWhileTest {
         final DataIns dataIns = new DataIns("inName", "inType");
         final DataOuts dataOuts = new DataOuts("outName", "outType", "outSource");
         final DataLoops dataLoops = new DataLoops();
-        final Condition condition = new Condition();
+        final List<Condition> condition = Arrays.asList(new Condition());
 
         final SequentialWhile sequentialWhile = new SequentialWhile("sequentialWhile",
                 new ArrayList<>(Collections.singleton(dataIns)),
@@ -121,7 +123,7 @@ public class SequentialWhileTest {
         sequentialWhile3 = new SequentialWhile("name", null, Collections.singletonList(new DataLoops()), null, null, null);
         Assert.assertNotEquals(sequentialWhile, sequentialWhile3);
 
-        sequentialWhile3 = new SequentialWhile("name", null, null, new Condition(), null, null);
+        sequentialWhile3 = new SequentialWhile("name", null, null, Collections.singletonList(new Condition()), null, null);
         Assert.assertNotEquals(sequentialWhile, sequentialWhile3);
 
         sequentialWhile3 = new SequentialWhile("name", null, null, null, Collections.singletonList(new AtomicFunction()), null);

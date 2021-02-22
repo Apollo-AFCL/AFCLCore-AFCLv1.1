@@ -1,6 +1,5 @@
 package at.uibk.dps.afcl.functions;
 
-import at.uibk.dps.afcl.functions.objects.ACondition;
 import at.uibk.dps.afcl.functions.objects.Condition;
 import at.uibk.dps.afcl.functions.objects.DataIns;
 import at.uibk.dps.afcl.functions.objects.DataOuts;
@@ -11,6 +10,7 @@ import org.meanbean.test.BeanTester;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Test the functionality of a if-then-else object.
@@ -26,9 +26,9 @@ public class IfThenElseTest {
     @Test
     public void testFullConstruction() {
 
-        final Condition condition = new Condition("AND", new ArrayList<>(Arrays.asList(
-                new ACondition("1", "2", "=="),
-                new ACondition("1", "1", "=="))));
+        final List<Condition> condition = Arrays.asList(
+                new Condition("1", "2", "==", "AND"),
+                new Condition("1", "1", "==", "AND"));
         final AtomicFunction atomicFunction = new AtomicFunction("atomicFunction", "atomicFunctionType", null, null);
         final DataIns dataIns = new DataIns("inName", "inType");
         final DataOuts dataOuts = new DataOuts("outName", "outType", "outSource");
@@ -117,7 +117,7 @@ public class IfThenElseTest {
         ifThenElse3 = new IfThenElse("name", Collections.singletonList(new DataIns("name", "type", "source")), null, null, null, null);
         Assert.assertNotEquals(ifThenElse1, ifThenElse3);
 
-        ifThenElse3 = new IfThenElse("name", null, new Condition("and", Collections.singletonList(new ACondition("1", "1", "=="))), null, null, null);
+        ifThenElse3 = new IfThenElse("name", null, Collections.singletonList(new Condition("1", "1", "==", "AND")), null, null, null);
         Assert.assertNotEquals(ifThenElse1, ifThenElse3);
 
         ifThenElse3 = new IfThenElse("name", null, null, Collections.singletonList(new AtomicFunction()), null, null);

@@ -33,7 +33,7 @@ public class IfThenElse extends Compound {
      * fulfilled {@link IfThenElse#elseBranch} will be executed.
      */
     @JsonProperty("condition")
-    private Condition condition;
+    private List<Condition> condition;
 
     /**
      * List of functions that will be executed if {@link IfThenElse#condition}
@@ -75,7 +75,7 @@ public class IfThenElse extends Compound {
      *                   fulfilled.
      * @param dataOuts   Data output ports ({@link DataOuts})
      */
-    public IfThenElse(final String name, final List<DataIns> dataIns, final Condition condition, final List<Function> thenBranch, final List<Function> elseBranch, final List<DataOuts> dataOuts) {
+    public IfThenElse(final String name, final List<DataIns> dataIns, final List<Condition> condition, final List<Function> thenBranch, final List<Function> elseBranch, final List<DataOuts> dataOuts) {
         this();
         this.name = name;
         this.dataIns = dataIns;
@@ -90,12 +90,12 @@ public class IfThenElse extends Compound {
      */
 
     @JsonProperty("condition")
-    public Condition getCondition() {
+    public List<Condition> getCondition() {
         return condition;
     }
 
     @JsonProperty("condition")
-    public void setCondition(final Condition condition) {
+    public void setCondition(final List<Condition> condition) {
         this.condition = condition;
     }
 
