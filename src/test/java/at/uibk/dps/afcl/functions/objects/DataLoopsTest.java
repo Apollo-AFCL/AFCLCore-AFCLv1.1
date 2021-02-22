@@ -40,7 +40,6 @@ public class DataLoopsTest {
         Assert.assertNull(dataLoops.getConstraints());
         Assert.assertNull(dataLoops.getInitSource());
         Assert.assertNull(dataLoops.getLoopSource());
-        Assert.assertNull(dataLoops.getPassing());
         Assert.assertNull(dataLoops.getProperties());
         Assert.assertNull(dataLoops.getValue());
     }
@@ -92,10 +91,6 @@ public class DataLoopsTest {
 
         dataLoops3 = new DataLoops("name", "type");
         dataLoops3.setValue("value");
-        Assert.assertNotEquals(dataLoops, dataLoops3);
-
-        dataLoops3 = new DataLoops("name", "type");
-        dataLoops3.setPassing(true);
         Assert.assertNotEquals(dataLoops, dataLoops3);
 
         dataLoops3 = new DataLoops("name", "type");

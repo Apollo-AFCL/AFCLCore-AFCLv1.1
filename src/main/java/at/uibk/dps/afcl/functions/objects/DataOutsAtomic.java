@@ -36,13 +36,6 @@ public class DataOutsAtomic {
     private String type;
 
     /**
-     * Tells whether value will be passed to other
-     * function
-     */
-    @JsonProperty("passing")
-    private Boolean passing;
-
-    /**
      * {@link PropertyConstraint} (information about the
      * behaviour of functions)
      */
@@ -98,16 +91,6 @@ public class DataOutsAtomic {
         this.type = type;
     }
 
-    @JsonProperty("passing")
-    public Boolean getPassing() {
-        return passing;
-    }
-
-    @JsonProperty("passing")
-    public void setPassing(final Boolean passing) {
-        this.passing = passing;
-    }
-
     @JsonProperty("properties")
     public List<PropertyConstraint> getProperties() {
         return properties;
@@ -139,13 +122,12 @@ public class DataOutsAtomic {
         final DataOutsAtomic that = (DataOutsAtomic) object;
         return Objects.equals(name, that.name) &&
                 Objects.equals(type, that.type) &&
-                Objects.equals(passing, that.passing) &&
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(constraints, that.constraints);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, type, passing, properties, constraints);
+        return Objects.hash(name, type, properties, constraints);
     }
 }

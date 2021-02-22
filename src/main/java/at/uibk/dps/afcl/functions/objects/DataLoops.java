@@ -58,13 +58,6 @@ public class DataLoops {
     private String value;
 
     /**
-     * Tells whether value will be passed to other
-     * function
-     */
-    @JsonProperty("passing")
-    private Boolean passing;
-
-    /**
      * {@link PropertyConstraint} (information about the
      * behaviour of functions)
      */
@@ -159,16 +152,6 @@ public class DataLoops {
         this.value = value;
     }
 
-    @JsonProperty("passing")
-    public Boolean getPassing() {
-        return passing;
-    }
-
-    @JsonProperty("passing")
-    public void setPassing(final Boolean passing) {
-        this.passing = passing;
-    }
-
     @JsonProperty("properties")
     public List<PropertyConstraint> getProperties() {
         return properties;
@@ -203,13 +186,12 @@ public class DataLoops {
                 Objects.equals(initSource, dataLoops.initSource) &&
                 Objects.equals(loopSource, dataLoops.loopSource) &&
                 Objects.equals(value, dataLoops.value) &&
-                Objects.equals(passing, dataLoops.passing) &&
                 Objects.equals(properties, dataLoops.properties) &&
                 Objects.equals(constraints, dataLoops.constraints);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, type, initSource, loopSource, value, passing, properties, constraints);
+        return Objects.hash(name, type, initSource, loopSource, value, properties, constraints);
     }
 }

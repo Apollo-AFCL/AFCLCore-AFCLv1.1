@@ -38,7 +38,6 @@ public class DataOutsAtomicTest {
         Assert.assertNull(dataOutsAtomic.getName());
         Assert.assertNull(dataOutsAtomic.getType());
         Assert.assertNull(dataOutsAtomic.getConstraints());
-        Assert.assertNull(dataOutsAtomic.getPassing());
         Assert.assertNull(dataOutsAtomic.getProperties());
     }
 
@@ -77,10 +76,6 @@ public class DataOutsAtomicTest {
         Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
 
         dataOutsAtomic3 = new DataOutsAtomic("name", "typeWrong");
-        Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
-
-        dataOutsAtomic3 = new DataOutsAtomic("name", "type");
-        dataOutsAtomic3.setPassing(true);
         Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
 
         dataOutsAtomic3 = new DataOutsAtomic("name", "type");

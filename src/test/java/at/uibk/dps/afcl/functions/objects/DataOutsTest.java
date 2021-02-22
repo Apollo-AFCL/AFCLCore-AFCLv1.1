@@ -40,7 +40,6 @@ public class DataOutsTest {
         Assert.assertNull(dataOuts.getType());
         Assert.assertNull(dataOuts.getSource());
         Assert.assertNull(dataOuts.getConstraints());
-        Assert.assertNull(dataOuts.getPassing());
         Assert.assertNull(dataOuts.getProperties());
     }
 
@@ -82,10 +81,6 @@ public class DataOutsTest {
         Assert.assertNotEquals(dataOuts, dataOuts3);
 
         dataOuts3 = new DataOuts("name", "type", "sourceWrong");
-        Assert.assertNotEquals(dataOuts, dataOuts3);
-
-        dataOuts3 = new DataOuts("name", "type", "source");
-        dataOuts3.setPassing(true);
         Assert.assertNotEquals(dataOuts, dataOuts3);
 
         dataOuts3 = new DataOuts("name", "type", "source");
