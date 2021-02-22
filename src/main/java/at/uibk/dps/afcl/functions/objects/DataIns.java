@@ -44,12 +44,6 @@ public class DataIns {
     private String source;
 
     /**
-     * Represents a constant value
-     */
-    @JsonProperty("value")
-    private String value;
-
-    /**
      * Tells whether value will be passed to other
      * function
      */
@@ -134,16 +128,6 @@ public class DataIns {
         this.source = source;
     }
 
-    @JsonProperty("value")
-    public String getValue() {
-        return value;
-    }
-
-    @JsonProperty("value")
-    public void setValue(final String value) {
-        this.value = value;
-    }
-
     @JsonProperty("passing")
     public Boolean getPassing() {
         return passing;
@@ -186,7 +170,6 @@ public class DataIns {
         return Objects.equals(name, dataIns.name) &&
                 Objects.equals(type, dataIns.type) &&
                 Objects.equals(source, dataIns.source) &&
-                Objects.equals(value, dataIns.value) &&
                 Objects.equals(passing, dataIns.passing) &&
                 Objects.equals(properties, dataIns.properties) &&
                 Objects.equals(constraints, dataIns.constraints);
@@ -194,6 +177,6 @@ public class DataIns {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, type, source, value, passing, properties, constraints);
+        return Objects.hash(name, type, source, passing, properties, constraints);
     }
 }

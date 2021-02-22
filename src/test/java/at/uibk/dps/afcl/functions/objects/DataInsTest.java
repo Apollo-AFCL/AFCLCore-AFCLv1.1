@@ -42,7 +42,6 @@ public class DataInsTest {
         Assert.assertNull(dataIns.getConstraints());
         Assert.assertNull(dataIns.getPassing());
         Assert.assertNull(dataIns.getProperties());
-        Assert.assertNull(dataIns.getValue());
     }
 
     /**
@@ -86,7 +85,7 @@ public class DataInsTest {
         Assert.assertNotEquals(dataIns, dataIns3);
 
         dataIns3 = new DataIns("name", "type", "source");
-        dataIns3.setValue("value");
+        dataIns3.setSource("value");
         Assert.assertNotEquals(dataIns, dataIns3);
 
         dataIns3 = new DataIns("name", "type", "source");
