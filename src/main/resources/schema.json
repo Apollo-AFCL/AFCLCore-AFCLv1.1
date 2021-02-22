@@ -30,13 +30,7 @@
             "type": "string"
           },
           "source": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          },
-          "passing": {
-            "type": "boolean"
+            "type": ["number", "string", "object", "array", "boolean", "null"]
           },
           "properties": {
             "$ref": "#/definitions/propertiesConstraintDef"
@@ -65,12 +59,6 @@
           },
           "source": {
             "type": "string"
-          },
-          "saveto": {
-            "type": "string"
-          },
-          "passing": {
-            "type": "boolean"
           },
           "properties": {
             "$ref": "#/definitions/propertiesConstraintDef"
@@ -107,9 +95,6 @@
           "value": {
             "type": "string"
           },
-          "passing": {
-            "type": "boolean"
-          },
           "properties": {
             "$ref": "#/definitions/propertiesConstraintDef"
           },
@@ -124,57 +109,53 @@
       }
     },
     "conditionDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "combinedWith": {
-          "type": "string",
-          "enum": [
-            "and",
-            "or"
-          ]
-        },
-        "conditions": {
-          "type": "array",
-          "items": [
-            {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "data1": {
-                  "type": "string"
-                },
-                "data2": {
-                  "type": "string"
-                },
-                "operator": {
-                  "type": "string",
-                  "enum": [
-                    "==",
-                    "!=",
-                    ">",
-                    ">=",
-                    "<",
-                    "=<",
-                    "contains",
-                    "startsWith",
-                    "endsWith"
-                  ]
-                },
-                "negation": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "data1",
-                "data2",
-                "operator"
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "data1": {
+              "type": ["number", "string", "object", "array", "boolean", "null"]
+            },
+            "data2": {
+              "type": ["number", "string", "object", "array", "boolean", "null"]
+            },
+            "type": {
+              "type": "string"
+            },
+            "operator": {
+              "type": "string",
+              "enum": [
+                "==",
+                "!=",
+                ">",
+                ">=",
+                "<",
+                "=<",
+                "contains",
+                "startsWith",
+                "endsWith"
+              ]
+            },
+            "negation": {
+              "type": "string"
+            },
+            "combinedWith": {
+              "type": "string",
+              "enum": [
+                "and",
+                "or"
               ]
             }
-          ],
-          "additionalItems": false
+          },
+          "required": [
+            "data1",
+            "data2",
+            "operator"
+          ]
         }
-      },
+      ],
       "required": [
         "combinedWith",
         "conditions"
@@ -182,9 +163,36 @@
     },
     "iteratorsDef": {
       "type": "array",
-       "items": {
-       "type": "string"
+      "items": {
+        "type": "string"
+      }
+    },
+    "loopCounterDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "step": {
+          "type": "string"
         }
+      },
+      "required": [
+        "name",
+        "type",
+        "from",
+        "to"
+      ]
     },
     "atomicFunctionDef": {
       "additionalProperties": false,
@@ -214,11 +222,11 @@
                   "type": {
                     "type": "string"
                   },
-                  "passing": {
-                    "type": "boolean"
+                  "properties": {
+                    "$ref": "#/definitions/propertiesConstraintDef"
                   },
-                  "saveto": {
-                    "type": "string"
+                  "constraints": {
+                    "$ref": "#/definitions/propertiesConstraintDef"
                   }
                 },
                 "required": [
@@ -237,39 +245,6 @@
           "required": [
             "name",
             "type"
-          ]
-        }
-      }
-    },
-    "sequenceDef": {
-      "additionalProperties": false,
-      "properties": {
-        "sequence": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "dataIns": {
-              "$ref": "#/definitions/dataInsDef"
-            },
-            "sequenceBody": {
-              "$ref": "#/definitions/functionDef"
-            },
-            "dataOuts": {
-              "$ref": "#/definitions/dataOutsDef"
-            },
-            "properties": {
-              "$ref": "#/definitions/propertiesConstraintDef"
-            },
-            "constraints": {
-              "$ref": "#/definitions/propertiesConstraintDef"
-            }
-          },
-          "required": [
-            "name",
-            "sequenceBody"
           ]
         }
       }
@@ -407,8 +382,8 @@
             "dataLoops": {
               "$ref": "#/definitions/dataLoopsDef"
             },
-            "iterators": {
-              "$ref": "#/definitions/iteratorsDef"
+            "loopCounter": {
+              "$ref": "#/definitions/loopCounterDef"
             },
             "loopBody": {
               "$ref": "#/definitions/functionDef"
@@ -425,7 +400,7 @@
           },
           "required": [
             "name",
-            "iterators",
+            "loopCounter",
             "loopBody"
           ]
         }
@@ -467,50 +442,6 @@
             "name",
             "condition",
             "loopBody"
-          ]
-        }
-      }
-    },
-    "parallelDef": {
-      "additionalProperties": false,
-      "properties": {
-        "parallel": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "dataIns": {
-              "$ref": "#/definitions/dataInsDef"
-            },
-            "parallelBody": {
-              "type": "array",
-              "items": [
-                {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {
-                    "section": {
-                      "$ref": "#/definitions/functionDef"
-                    }
-                  }
-                }
-              ]
-            },
-            "dataOuts": {
-              "$ref": "#/definitions/dataOutsDef"
-            },
-            "properties": {
-              "$ref": "#/definitions/propertiesConstraintDef"
-            },
-            "constraints": {
-              "$ref": "#/definitions/propertiesConstraintDef"
-            }
-          },
-          "required": [
-            "name",
-            "parallelBody"
           ]
         }
       }
@@ -588,16 +519,10 @@
             "$ref": "#/definitions/atomicFunctionDef"
           },
           {
-            "$ref": "#/definitions/sequenceDef"
-          },
-          {
             "$ref": "#/definitions/ifThenElseDef"
           },
           {
             "$ref": "#/definitions/switchDef"
-          },
-          {
-            "$ref": "#/definitions/parallelDef"
           },
           {
             "$ref": "#/definitions/parallelForDef"

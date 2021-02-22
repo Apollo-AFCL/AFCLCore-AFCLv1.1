@@ -4,6 +4,7 @@ import at.uibk.dps.afcl.Function;
 import at.uibk.dps.afcl.functions.objects.DataIns;
 import at.uibk.dps.afcl.functions.objects.DataLoops;
 import at.uibk.dps.afcl.functions.objects.DataOuts;
+import at.uibk.dps.afcl.functions.objects.LoopCounter;
 import com.fasterxml.jackson.annotation.*;
 
 import java.util.ArrayList;
@@ -21,79 +22,81 @@ import java.util.Objects;
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class SequentialFor extends LoopCompound {
 
-	/**
-	 * Contains needed information about potential loop data flow
-	 */
-	@JsonProperty("dataLoops")
-	private List<DataLoops> dataLoopsSequentialFor;
+    /**
+     * Contains needed information about potential loop data flow
+     */
+    @JsonProperty("dataLoops")
+    private List<DataLoops> dataLoops;
 
-	/**
-	 * Contains needed information about the number of (sequential) loop iterations
-	 */
-	@JsonProperty("iterators")
-	protected final List<String> iterators = new ArrayList<>();
+    /**
+     * Contains needed information about the number of (sequential) loop iterations
+     */
+    @JsonProperty("loopCounter")
+    private LoopCounter loopCounter;
 
-	public SequentialFor() {
-	}
+    /**
+     * Default constructor.
+     */
+    public SequentialFor() {
+        super();
+    }
 
-	/**
-	 * Constructor for function compound for
-	 *
-	 * @param name                     Unique identifier of the compound
-	 * @param dataIns                  Data input ports ({@link DataIns})
-	 * @param loopCounterSequentialFor information about the number of (sequential)
-	 *                                 loop iterations
-	 * @param loopBodySequentialFor    functions which should be executed in each
-	 *                                 iteration
-	 * @param dataOuts                 Data output ports ({@link DataOuts})
-	 */
-	public SequentialFor(String name, List<DataIns> dataIns, List<DataLoops> dataLoopsSequentialFor,
-			List<String> iterators, List<Function> loopBodySequentialFor, List<DataOuts> dataOuts) {
-		this.name = name;
-		this.dataIns = dataIns;
-		this.dataLoopsSequentialFor = dataLoopsSequentialFor;
-		this.iterators.addAll(iterators);
-		this.setLoopBody(loopBodySequentialFor);
-		this.dataOuts = dataOuts;
-	}
+    /**
+     * Constructor for function compound for
+     *
+     * @param name        Unique identifier of the compound
+     * @param dataIns     Data input ports ({@link DataIns})
+     * @param loopCounter information about the number of
+     *                    (sequential) loop iterations
+     * @param loopBodySequentialFor    functions which should be
+     *                                 executed in each iteration
+     * @param dataOuts    Data output ports ({@link DataOuts})
+     */
+    public SequentialFor(final String name, final List<DataIns> dataIns, final List<DataLoops> dataLoops, final LoopCounter loopCounter,
+                         final List<Function> loopBodySequentialFor, final List<DataOuts> dataOuts) {
+        this();
+        this.name = name;
+        this.dataIns = dataIns;
+        this.dataLoops = dataLoops;
+        this.loopCounter = loopCounter;
+        this.setLoopBody(loopBodySequentialFor);
+        this.dataOuts = dataOuts;
+    }
 
-	/**
-	 * Getter and Setter
-	 */
+    @JsonProperty("dataLoops")
+    public List<DataLoops> getDataLoops() { return dataLoops; }
 
-	@JsonProperty("dataLoops")
-	public List<DataLoops> getDataLoops() {
-		return dataLoopsSequentialFor;
-	}
+    @JsonProperty("dataLoops")
+    public void setDataLoops(final List<DataLoops> dataLoops) { this.dataLoops = dataLoops; }
 
-	@JsonProperty("dataLoops")
-	public void setDataLoops(List<DataLoops> dataLoops) {
-		this.dataLoopsSequentialFor = dataLoops;
-	}
+    @JsonProperty("loopCounter")
+    public LoopCounter getLoopCounter() {
+        return loopCounter;
+    }
 
-	@JsonProperty("iterators")
-	public List<String> getIterators() {
-		return this.iterators;
-	}
+    @JsonProperty("loopCounter")
+    public void setLoopCounter(final LoopCounter loopCounterSequentialFor) {
+        this.loopCounter = loopCounterSequentialFor;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		SequentialFor that = (SequentialFor) o;
-		return Objects.equals(dataLoopsSequentialFor, that.dataLoopsSequentialFor)
-				&& Objects.equals(iterators, that.iterators);
-	}
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        final SequentialFor that = (SequentialFor) object;
+        return Objects.equals(dataLoops, that.dataLoops) &&
+                Objects.equals(loopCounter, that.loopCounter);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), dataLoopsSequentialFor, iterators);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dataLoops, loopCounter);
+    }
 }

@@ -101,7 +101,7 @@ public class ParallelForTest {
 		ParallelFor parallelFor2 = new ParallelFor("name", null, new ArrayList<>(), null, null);
 		Assert.assertEquals(parallelFor1, parallelFor2);
 		Assert.assertEquals(parallelFor1.hashCode(), parallelFor2.hashCode());
-		parallelFor2.setAdditionalProperty("name", "type");
+		parallelFor2.setAdditionalProperties("name", "type");
 		Assert.assertNotEquals(parallelFor1, parallelFor2);
 
 		ParallelFor parallelFor3;

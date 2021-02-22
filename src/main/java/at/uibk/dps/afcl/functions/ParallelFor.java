@@ -32,7 +32,11 @@ public class ParallelFor extends LoopCompound {
     @JsonProperty("iterators")
     protected final List<String> iterators = new ArrayList<>();
 
+    /**
+     * Default constructor.
+     */
     public ParallelFor() {
+        super();
     }
 
     /**
@@ -40,8 +44,10 @@ public class ParallelFor extends LoopCompound {
      *
      * @param name        Unique identifier of the compound
      * @param dataIns     Data input ports ({@link DataIns})
-     * @param loopCounterParallelFor information about the number of (parallel) loop iterations
-     * @param loopBodyParallelFor    functions which should be executed in each iteration
+     * @param iterators information about the number of
+     *                    (parallel) loop iterations
+     * @param loopBodyParallelFor    functions which should be
+     *                               executed in each iteration
      * @param dataOuts    Data output ports ({@link DataOuts})
      */
     public ParallelFor(String name, List<DataIns> dataIns, List<String> iterators, List<Function> loopBodyParallelFor, List<DataOuts> dataOuts) {
@@ -62,17 +68,17 @@ public class ParallelFor extends LoopCompound {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(final Object object) {
+        if (this == object) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        if (!super.equals(o)) {
+        if (!super.equals(object)) {
             return false;
         }
-        ParallelFor that = (ParallelFor) o;
+        ParallelFor that = (ParallelFor) object;
         return Objects.equals(iterators, that.iterators);
     }
 
