@@ -42,7 +42,6 @@ public class DataOutsTest {
         Assert.assertNull(dataOuts.getConstraints());
         Assert.assertNull(dataOuts.getPassing());
         Assert.assertNull(dataOuts.getProperties());
-        Assert.assertNull(dataOuts.getSaveto());
     }
 
     /**
@@ -83,10 +82,6 @@ public class DataOutsTest {
         Assert.assertNotEquals(dataOuts, dataOuts3);
 
         dataOuts3 = new DataOuts("name", "type", "sourceWrong");
-        Assert.assertNotEquals(dataOuts, dataOuts3);
-
-        dataOuts3 = new DataOuts("name", "type", "source");
-        dataOuts3.setSaveto("file");
         Assert.assertNotEquals(dataOuts, dataOuts3);
 
         dataOuts3 = new DataOuts("name", "type", "source");

@@ -18,7 +18,6 @@ import java.util.Objects;
         "name",
         "type",
         "source",
-        "saveto",
         "properties",
         "constraints"
 })
@@ -41,13 +40,6 @@ public class DataOuts {
      */
     @JsonProperty("source")
     private String source;
-
-    /**
-     * To specify the output of the data output
-     * port
-     */
-    @JsonProperty("saveto")
-    private String saveto;
 
     /**
      * Tells whether value will be passed to other
@@ -124,16 +116,6 @@ public class DataOuts {
         this.source = source;
     }
 
-    @JsonProperty("saveto")
-    public String getSaveto() {
-        return saveto;
-    }
-
-    @JsonProperty("saveto")
-    public void setSaveto(final String saveto) {
-        this.saveto = saveto;
-    }
-
     @JsonProperty("passing")
     public Boolean getPassing() {
         return passing;
@@ -176,7 +158,6 @@ public class DataOuts {
         return Objects.equals(name, dataOuts.name) &&
                 Objects.equals(type, dataOuts.type) &&
                 Objects.equals(source, dataOuts.source) &&
-                Objects.equals(saveto, dataOuts.saveto) &&
                 Objects.equals(passing, dataOuts.passing) &&
                 Objects.equals(properties, dataOuts.properties) &&
                 Objects.equals(constraints, dataOuts.constraints);
@@ -184,6 +165,6 @@ public class DataOuts {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, type, source, saveto, passing, properties, constraints);
+        return Objects.hash(name, type, source, passing, properties, constraints);
     }
 }

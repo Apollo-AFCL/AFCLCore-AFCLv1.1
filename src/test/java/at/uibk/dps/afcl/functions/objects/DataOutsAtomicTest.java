@@ -40,7 +40,6 @@ public class DataOutsAtomicTest {
         Assert.assertNull(dataOutsAtomic.getConstraints());
         Assert.assertNull(dataOutsAtomic.getPassing());
         Assert.assertNull(dataOutsAtomic.getProperties());
-        Assert.assertNull(dataOutsAtomic.getSaveto());
     }
 
     /**
@@ -78,10 +77,6 @@ public class DataOutsAtomicTest {
         Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
 
         dataOutsAtomic3 = new DataOutsAtomic("name", "typeWrong");
-        Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
-
-        dataOutsAtomic3 = new DataOutsAtomic("name", "type");
-        dataOutsAtomic3.setSaveto("file");
         Assert.assertNotEquals(dataOutsAtomic, dataOutsAtomic3);
 
         dataOutsAtomic3 = new DataOutsAtomic("name", "type");
