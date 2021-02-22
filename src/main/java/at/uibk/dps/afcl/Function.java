@@ -1,11 +1,6 @@
 package at.uibk.dps.afcl;
 
-import at.uibk.dps.afcl.functions.Switch;
-import at.uibk.dps.afcl.functions.AtomicFunction;
-import at.uibk.dps.afcl.functions.IfThenElse;
-import at.uibk.dps.afcl.functions.Parallel;
-import at.uibk.dps.afcl.functions.ParallelFor;
-import at.uibk.dps.afcl.functions.Sequence;
+import at.uibk.dps.afcl.functions.*;
 import at.uibk.dps.afcl.functions.objects.PropertyConstraint;
 import com.fasterxml.jackson.annotation.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,9 +18,7 @@ import java.util.Map;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AtomicFunction.class, name = "function"),
         @JsonSubTypes.Type(value = IfThenElse.class, name = "if"),
-        @JsonSubTypes.Type(value = Parallel.class, name = "parallel"),
         @JsonSubTypes.Type(value = ParallelFor.class, name = "parallelFor"),
-        @JsonSubTypes.Type(value = Sequence.class, name = "sequence"),
         @JsonSubTypes.Type(value = Switch.class, name = "switch")
 })
 public class Function {
