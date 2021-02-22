@@ -1,5 +1,7 @@
 # AFCLCore
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cdd3348ca01345e8b8bbff24707d46c1)](https://www.codacy.com/gh/Apollo-AFCL/AFCLCore-AFCLv1.1/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Apollo-AFCL/AFCLCore-AFCLv1.1&amp;utm_campaign=Badge_Grade)
+
 
 A project to create and manage AFCL and CFCL workflows using Java objects.
  
