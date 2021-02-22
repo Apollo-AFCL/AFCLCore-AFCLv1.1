@@ -51,6 +51,7 @@ public class ParallelFor extends LoopCompound {
      * @param dataOuts    Data output ports ({@link DataOuts})
      */
     public ParallelFor(String name, List<DataIns> dataIns, List<String> iterators, List<Function> loopBodyParallelFor, List<DataOuts> dataOuts) {
+        this();
         this.name = name;
         this.dataIns = dataIns;
         this.iterators.addAll(iterators);
@@ -78,7 +79,7 @@ public class ParallelFor extends LoopCompound {
         if (!super.equals(object)) {
             return false;
         }
-        ParallelFor that = (ParallelFor) object;
+        final ParallelFor that = (ParallelFor) object;
         return Objects.equals(iterators, that.iterators);
     }
 
