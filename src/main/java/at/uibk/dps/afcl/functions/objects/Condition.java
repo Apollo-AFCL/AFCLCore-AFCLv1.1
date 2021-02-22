@@ -15,7 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @JsonPropertyOrder({
         "data1",
         "data2",
-        "operator"
+        "type",
+        "operator",
+        "combinedWith"
 })
 public class Condition {
 
@@ -30,6 +32,12 @@ public class Condition {
      */
     @JsonProperty("data2")
     private String data2;
+
+    /**
+     * The type of the operands
+     */
+    @JsonProperty("type")
+    private String type;
 
     /**
      * Represents how the different conditions should be
@@ -70,9 +78,10 @@ public class Condition {
      * @param data2    Right operand
      * @param operator Operand (e.g. ==, contains, ...)
      */
-    public Condition(final String data1, final String data2, final String operator, final String combinedWith) {
+    public Condition(final String data1, final String data2, final String type, final String operator, final String combinedWith) {
         this.data1 = data1;
         this.data2 = data2;
+        this.type = type;
         this.operator = operator;
         this.combinedWith = combinedWith;
     }
@@ -99,6 +108,16 @@ public class Condition {
     @JsonProperty("data2")
     public void setData2(final String data2) {
         this.data2 = data2;
+    }
+
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty("type")
+    public void setType(final String type) {
+        this.type = type;
     }
 
     @JsonProperty("combinedWith")

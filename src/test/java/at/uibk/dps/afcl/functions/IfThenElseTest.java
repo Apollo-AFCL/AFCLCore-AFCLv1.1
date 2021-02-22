@@ -27,8 +27,8 @@ public class IfThenElseTest {
     public void testFullConstruction() {
 
         final List<Condition> condition = Arrays.asList(
-                new Condition("1", "2", "==", "AND"),
-                new Condition("1", "1", "==", "AND"));
+                new Condition("1", "2", "number", "==", "AND"),
+                new Condition("1", "1", "number", "==", "AND"));
         final AtomicFunction atomicFunction = new AtomicFunction("atomicFunction", "atomicFunctionType", null, null);
         final DataIns dataIns = new DataIns("inName", "inType");
         final DataOuts dataOuts = new DataOuts("outName", "outType", "outSource");
@@ -117,7 +117,7 @@ public class IfThenElseTest {
         ifThenElse3 = new IfThenElse("name", Collections.singletonList(new DataIns("name", "type", "source")), null, null, null, null);
         Assert.assertNotEquals(ifThenElse1, ifThenElse3);
 
-        ifThenElse3 = new IfThenElse("name", null, Collections.singletonList(new Condition("1", "1", "==", "AND")), null, null, null);
+        ifThenElse3 = new IfThenElse("name", null, Collections.singletonList(new Condition("1", "1", "number", "==", "AND")), null, null, null);
         Assert.assertNotEquals(ifThenElse1, ifThenElse3);
 
         ifThenElse3 = new IfThenElse("name", null, null, Collections.singletonList(new AtomicFunction()), null, null);

@@ -21,7 +21,7 @@ public class ConditionTest {
      */
     @Test
     public void testFullConstruction() {
-        final Condition condition = new Condition("1", "2", "==", "AND");
+        final Condition condition = new Condition("1", "2", "number", "==", "AND");
 
         Assert.assertEquals("1", condition.getData1());
         Assert.assertEquals("2", condition.getData2());
@@ -62,7 +62,7 @@ public class ConditionTest {
      */
     @Test
     public void testHashEquals() {
-        final Condition aCondition = new Condition("1", "2", "!=", "AND");
+        final Condition aCondition = new Condition("1", "2", "number", "!=", "AND");
 
         Assert.assertEquals(aCondition, aCondition);
         Assert.assertEquals(aCondition.hashCode(), aCondition.hashCode());
@@ -71,23 +71,23 @@ public class ConditionTest {
         final Compound compound = new Compound();
         Assert.assertNotEquals(aCondition, compound);
 
-        final Condition aCondition2 = new Condition("1", "2", "!=", "AND");
+        final Condition aCondition2 = new Condition("1", "2", "number", "!=", "AND");
         Assert.assertEquals(aCondition, aCondition2);
         Assert.assertEquals(aCondition.hashCode(), aCondition2.hashCode());
         aCondition2.setAdditionalProperties("name", "type");
         Assert.assertNotEquals(aCondition, aCondition2);
 
         Condition aCondition3;
-        aCondition3 = new Condition("5", "2", "!=", "AND");
+        aCondition3 = new Condition("5", "2", "number", "!=", "AND");
         Assert.assertNotEquals(aCondition, aCondition3);
 
-        aCondition3 = new Condition("1", "5", "!=", "AND");
+        aCondition3 = new Condition("1", "5", "number", "!=", "AND");
         Assert.assertNotEquals(aCondition, aCondition3);
 
-        aCondition3 = new Condition("1", "2", "==", "AND");
+        aCondition3 = new Condition("1", "2", "number", "==", "AND");
         Assert.assertNotEquals(aCondition, aCondition3);
 
-        aCondition3 = new Condition("1", "2", "!=", "AND");
+        aCondition3 = new Condition("1", "2", "number", "!=", "AND");
         aCondition3.setNegation("negation");
         Assert.assertNotEquals(aCondition, aCondition3);
     }
