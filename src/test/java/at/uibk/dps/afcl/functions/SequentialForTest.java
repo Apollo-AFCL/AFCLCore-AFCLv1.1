@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Test the functionality of a sequqntialFor object.
@@ -17,6 +19,7 @@ import java.util.Collections;
  * @author stefanpedratscher
  */
 public class SequentialForTest {
+
     /**
      * Test full construction of a sequentialFor.
      *

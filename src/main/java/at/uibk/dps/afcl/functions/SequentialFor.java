@@ -6,22 +6,18 @@ import at.uibk.dps.afcl.functions.objects.DataLoops;
 import at.uibk.dps.afcl.functions.objects.DataOuts;
 import at.uibk.dps.afcl.functions.objects.LoopCounter;
 import com.fasterxml.jackson.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * This class describes the sequential for compound
+ * 
  * @author stefanpedratscher
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "name",
-        "dataIns",
-        "dataLoops",
-        "loopCounter",
-        "loopBody",
-        "dataOuts"
-})
+@JsonPropertyOrder({ "name", "dataIns", "dataLoops", "loopCounter", "loopBody", "dataOuts" })
 @JsonTypeName("for")
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class SequentialFor extends LoopCompound {
@@ -66,10 +62,6 @@ public class SequentialFor extends LoopCompound {
         this.setLoopBody(loopBodySequentialFor);
         this.dataOuts = dataOuts;
     }
-
-    /**
-     * Getter and Setter
-     */
 
     @JsonProperty("dataLoops")
     public List<DataLoops> getDataLoops() { return dataLoops; }

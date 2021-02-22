@@ -6,6 +6,7 @@ import at.uibk.dps.afcl.functions.AtomicFunction;
 import at.uibk.dps.afcl.functions.ParallelFor;
 import at.uibk.dps.afcl.functions.objects.LoopCounter;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import com.google.common.collect.Iterators;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class UtilsTest {
         workflowBody.add(atomicFunction);
 
         final ParallelFor parallelFor = new ParallelFor("parallelFor", null,
-            new LoopCounter("loopCounter", "loopCounterType", "0", "10"),
+			Arrays.asList("10", "collectionName"),
             new ArrayList<>(Collections.singleton(atomicFunction)), null);
         workflowBody.add(parallelFor);
 
@@ -89,8 +90,8 @@ public class UtilsTest {
         final File workflowFile = new File("writeRead.yaml");
 
         final File schema = new File(
-            Objects.requireNonNull(getClass().getClassLoader().getResource("schema.json"))
-                .getFile());
+                Objects.requireNonNull(getClass().getClassLoader().getResource("schema.json"))
+                        .getFile());
 
         final Workflow workflow1 = getSimpleWorkflow();
         Workflow workflow2 = null;
@@ -188,13 +189,31 @@ public class UtilsTest {
      * Test the reading of a json string.
      */
     @Test public void readJsonString() {
-        final String jsonString =
-            "{\r\n  \"name\": \"workflow\",\r\n  \"workflowBody\": [\r\n    {\r\n      \"function\": {\r\n        \"name\": \"atomicFunction\",\r\n        "
-                + "\"type\": \"atomicFunctionType\"\r\n      }\r\n    },\r\n    {\r\n      \"parallelFor\": {\r\n        \"name\": \"parallelFor\",\r\n        "
-                + "\"loopCounter\": {\r\n          \"name\": \"loopCounter\",\r\n          \"type\": \"loopCounterType\",\r\n          \"from\": \"0\",\r\n          "
-                + "\"to\": \"10\"\r\n        },\r\n        \"loopBody\": [\r\n          {\r\n            \"function\": {\r\n              "
-                + "\"name\": \"atomicFunction\",\r\n              \"type\": \"atomicFunctionType\"\r\n            }\r\n          }\r\n        "
-                + "]\r\n      }\r\n    }\r\n  ]\r\n}";
+		String jsonString = "{ \n" +
+                "  \"name\": \"workflow\",\n" +
+                "  \"workflowBody\": [\n" +
+                "    {\n" +
+                "      \"function\": { \n" +
+                "        \"name\": \"atomicFunction\",  \n" +
+                "        \"type\": \"atomicFunctionType\"\n" +
+                "      }\n" +
+                "    },    \n" +
+                "    {     \n" +
+                "      \"parallelFor\": {        \n" +
+                "        \"name\": \"parallelFor\",       \n" +
+                "        \"iterators\": [\"10\", \"collectionName\"],        \n" +
+                "        \"loopBody\": [         \n" +
+                "          {\n" +
+                "            \"function\": {              \n" +
+                "              \"name\": \"atomicFunction\",              \n" +
+                "              \"type\": \"atomicFunctionType\"           \n" +
+                "            }      \n" +
+                "          }        \n" +
+                "        ]  \n" +
+                "      }  \n" +
+                "    } \n" +
+                "  ]\n" +
+                "}";
         final File schema = new File(
             Objects.requireNonNull(getClass().getClassLoader().getResource("schema.json"))
                 .getFile());
