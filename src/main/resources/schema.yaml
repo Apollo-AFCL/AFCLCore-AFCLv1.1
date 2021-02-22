@@ -3,13 +3,13 @@ definitions:
   propertiesConstraintDef:
     type: array
     items:
-    - type: object
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-        value:
-          type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+          value:
+            type: string
   dataInsDef:
     type: array
     items:
@@ -21,22 +21,20 @@ definitions:
         type:
           type: string
         source:
-          type: string
-        value:
           type:
-          - number
-          - string
-          - object
-          - array
-          - boolean
-          - 'null'
+            - number
+            - string
+            - object
+            - array
+            - boolean
+            - 'null'
         properties:
           "$ref": "#/definitions/propertiesConstraintDef"
         constraints:
           "$ref": "#/definitions/propertiesConstraintDef"
       required:
-      - name
-      - type
+        - name
+        - type
   dataOutsDef:
     type: array
     items:
@@ -49,16 +47,14 @@ definitions:
           type: string
         source:
           type: string
-        saveto:
-          type: string
         properties:
           "$ref": "#/definitions/propertiesConstraintDef"
         constraints:
           "$ref": "#/definitions/propertiesConstraintDef"
       required:
-      - name
-      - type
-      - source
+        - name
+        - type
+        - source
   dataLoopsDef:
     type: array
     items:
@@ -80,30 +76,35 @@ definitions:
         constraints:
           "$ref": "#/definitions/propertiesConstraintDef"
       required:
-      - name
-      - type
+        - name
+        - type
   conditionDef:
-    type: object
-    additionalProperties: false
-    properties:
-      combinedWith:
-        type: string
-        enum:
-        - and
-        - or
-      conditions:
-        type: array
-        items:
-        - type: object
-          additionalProperties: false
-          properties:
-            data1:
-              type: string
-            data2:
-              type: string
-            operator:
-              type: string
-              enum:
+    type: array
+    items:
+      - type: object
+        additionalProperties: false
+        properties:
+          data1:
+            type:
+              - number
+              - string
+              - object
+              - array
+              - boolean
+              - 'null'
+          data2:
+            type:
+              - number
+              - string
+              - object
+              - array
+              - boolean
+              - 'null'
+          type:
+            type: string
+          operator:
+            type: string
+            enum:
               - "=="
               - "!="
               - ">"
@@ -113,15 +114,24 @@ definitions:
               - contains
               - startsWith
               - endsWith
-            negation:
-              type: string
-          required:
+          negation:
+            type: string
+          combinedWith:
+            type: string
+            enum:
+              - and
+              - or
+        required:
           - data1
           - data2
           - operator
     required:
-    - combinedWith
-    - conditions
+      - combinedWith
+      - conditions
+  iteratorsDef:
+    type: array
+    items:
+      type: string
   loopCounterDef:
     type: object
     additionalProperties: false
@@ -137,10 +147,10 @@ definitions:
       step:
         type: string
     required:
-    - name
-    - type
-    - from
-    - to
+      - name
+      - type
+      - from
+      - to
   atomicFunctionDef:
     additionalProperties: false
     properties:
@@ -164,44 +174,20 @@ definitions:
                   type: string
                 type:
                   type: string
-                saveto:
-                  type: string
                 properties:
                   "$ref": "#/definitions/propertiesConstraintDef"
                 constraints:
                   "$ref": "#/definitions/propertiesConstraintDef"
               required:
-              - name
-              - type
+                - name
+                - type
           properties:
             "$ref": "#/definitions/propertiesConstraintDef"
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - type
-  sequenceDef:
-    additionalProperties: false
-    properties:
-      sequence:
-        type: object
-        additionalProperties: false
-        properties:
-          name:
-            type: string
-          dataIns:
-            "$ref": "#/definitions/dataInsDef"
-          sequenceBody:
-            "$ref": "#/definitions/functionDef"
-          dataOuts:
-            "$ref": "#/definitions/dataOutsDef"
-          properties:
-            "$ref": "#/definitions/propertiesConstraintDef"
-          constraints:
-            "$ref": "#/definitions/propertiesConstraintDef"
-        required:
-        - name
-        - sequenceBody
+          - name
+          - type
   ifThenElseDef:
     additionalProperties: false
     properties:
@@ -226,9 +212,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - condition
-        - then
+          - name
+          - condition
+          - then
   switchDef:
     additionalProperties: false
     properties:
@@ -251,23 +237,23 @@ definitions:
               source:
                 type: string
             required:
-            - name
-            - type
+              - name
+              - type
           cases:
             type: array
             items:
-            - type: object
-              additionalProperties: false
-              properties:
-                value:
-                  type: string
-                break:
-                  type: string
-                functions:
-                  "$ref": "#/definitions/functionDef"
-              required:
-              - value
-              - functions
+              - type: object
+                additionalProperties: false
+                properties:
+                  value:
+                    type: string
+                  break:
+                    type: string
+                  functions:
+                    "$ref": "#/definitions/functionDef"
+                required:
+                  - value
+                  - functions
           default:
             "$ref": "#/definitions/functionDef"
           dataOuts:
@@ -277,9 +263,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - dataEval
-        - cases
+          - name
+          - dataEval
+          - cases
   sequentialForDef:
     additionalProperties: false
     properties:
@@ -304,9 +290,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - loopCounter
-        - loopBody
+          - name
+          - loopCounter
+          - loopBody
   sequentialWhileDef:
     additionalProperties: false
     properties:
@@ -331,37 +317,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - condition
-        - loopBody
-  parallelDef:
-    additionalProperties: false
-    properties:
-      parallel:
-        type: object
-        additionalProperties: false
-        properties:
-          name:
-            type: string
-          dataIns:
-            "$ref": "#/definitions/dataInsDef"
-          parallelBody:
-            type: array
-            items:
-            - type: object
-              additionalProperties: false
-              properties:
-                section:
-                  "$ref": "#/definitions/functionDef"
-          dataOuts:
-            "$ref": "#/definitions/dataOutsDef"
-          properties:
-            "$ref": "#/definitions/propertiesConstraintDef"
-          constraints:
-            "$ref": "#/definitions/propertiesConstraintDef"
-        required:
-        - name
-        - parallelBody
+          - name
+          - condition
+          - loopBody
   parallelForDef:
     additionalProperties: false
     properties:
@@ -373,8 +331,8 @@ definitions:
             type: string
           dataIns:
             "$ref": "#/definitions/dataInsDef"
-          loopCounter:
-            "$ref": "#/definitions/loopCounterDef"
+          iterators:
+            "$ref": "#/definitions/iteratorsDef"
           loopBody:
             "$ref": "#/definitions/functionDef"
           dataOuts:
@@ -384,9 +342,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-        - name
-        - loopCounter
-        - loopBody
+          - name
+          - iterators
+          - loopBody
   subFCDef:
     type: object
     additionalProperties: false
@@ -404,20 +362,18 @@ definitions:
       constraints:
         "$ref": "#/definitions/propertiesConstraintDef"
     required:
-    - name
-    - subFCBody
+      - name
+      - subFCBody
   functionDef:
     type: array
     items:
       anyOf:
-      - "$ref": "#/definitions/atomicFunctionDef"
-      - "$ref": "#/definitions/sequenceDef"
-      - "$ref": "#/definitions/ifThenElseDef"
-      - "$ref": "#/definitions/switchDef"
-      - "$ref": "#/definitions/parallelDef"
-      - "$ref": "#/definitions/parallelForDef"
-      - "$ref": "#/definitions/sequentialWhileDef"
-      - "$ref": "#/definitions/sequentialForDef"
+        - "$ref": "#/definitions/atomicFunctionDef"
+        - "$ref": "#/definitions/ifThenElseDef"
+        - "$ref": "#/definitions/switchDef"
+        - "$ref": "#/definitions/parallelForDef"
+        - "$ref": "#/definitions/sequentialWhileDef"
+        - "$ref": "#/definitions/sequentialForDef"
 type: object
 additionalProperties: false
 properties:
