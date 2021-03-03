@@ -56,7 +56,7 @@ public class Condition {
      * Negate the condition
      */
     @JsonProperty("negation")
-    private String negation;
+    private boolean negation;
 
     /**
      * Optional additional json properties.
@@ -78,12 +78,13 @@ public class Condition {
      * @param data2    Right operand
      * @param operator Operand (e.g. ==, contains, ...)
      */
-    public Condition(final String data1, final String data2, final String type, final String operator, final String combinedWith) {
+    public Condition(final String data1, final String data2, final String type, final String operator, final String combinedWith, final boolean negation) {
         this.data1 = data1;
         this.data2 = data2;
         this.type = type;
         this.operator = operator;
         this.combinedWith = combinedWith;
+        this.negation = negation;
     }
 
     /**
@@ -141,12 +142,12 @@ public class Condition {
     }
 
     @JsonProperty("negation")
-    public String getNegation() {
+    public boolean getNegation() {
         return negation;
     }
 
     @JsonProperty("negation")
-    public void setNegation(final String negation) {
+    public void setNegation(final boolean negation) {
         this.negation = negation;
     }
 
