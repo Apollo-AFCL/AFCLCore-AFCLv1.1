@@ -55,29 +55,6 @@ definitions:
         - name
         - type
         - source
-  dataLoopsDef:
-    type: array
-    items:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        initSource:
-          type: string
-        loopSource:
-          type: string
-        value:
-          type: string
-        properties:
-          "$ref": "#/definitions/propertiesConstraintDef"
-        constraints:
-          "$ref": "#/definitions/propertiesConstraintDef"
-      required:
-        - name
-        - type
   conditionDef:
     type: array
     items:
@@ -215,57 +192,6 @@ definitions:
           - name
           - condition
           - then
-  switchDef:
-    additionalProperties: false
-    properties:
-      switch:
-        type: object
-        additionalProperties: false
-        properties:
-          name:
-            type: string
-          dataIns:
-            "$ref": "#/definitions/dataInsDef"
-          dataEval:
-            type: object
-            additionalProperties: false
-            properties:
-              name:
-                type: string
-              type:
-                type: string
-              source:
-                type: string
-            required:
-              - name
-              - type
-          cases:
-            type: array
-            items:
-              - type: object
-                additionalProperties: false
-                properties:
-                  value:
-                    type: string
-                  break:
-                    type: string
-                  functions:
-                    "$ref": "#/definitions/functionDef"
-                required:
-                  - value
-                  - functions
-          default:
-            "$ref": "#/definitions/functionDef"
-          dataOuts:
-            "$ref": "#/definitions/dataOutsDef"
-          properties:
-            "$ref": "#/definitions/propertiesConstraintDef"
-          constraints:
-            "$ref": "#/definitions/propertiesConstraintDef"
-        required:
-          - name
-          - dataEval
-          - cases
   sequentialForDef:
     additionalProperties: false
     properties:
@@ -277,39 +203,12 @@ definitions:
             type: string
           dataIns:
             "$ref": "#/definitions/dataInsDef"
-          dataLoops:
-            "$ref": "#/definitions/dataLoopsDef"
-          loopCounter:
-            "$ref": "#/definitions/loopCounterDef"
+          iterator:
+            "$ref": "#/definitions/iteratorsDef"          
           loopBody:
             "$ref": "#/definitions/functionDef"
-          dataOuts:
-            "$ref": "#/definitions/dataOutsDef"
-          properties:
-            "$ref": "#/definitions/propertiesConstraintDef"
-          constraints:
-            "$ref": "#/definitions/propertiesConstraintDef"
-        required:
-          - name
-          - loopCounter
-          - loopBody
-  sequentialWhileDef:
-    additionalProperties: false
-    properties:
-      while:
-        type: object
-        additionalProperties: false
-        properties:
-          name:
-            type: string
-          dataIns:
-            "$ref": "#/definitions/dataInsDef"
-          dataLoops:
-            "$ref": "#/definitions/dataLoopsDef"
           condition:
             "$ref": "#/definitions/conditionDef"
-          loopBody:
-            "$ref": "#/definitions/functionDef"
           dataOuts:
             "$ref": "#/definitions/dataOutsDef"
           properties:
@@ -318,7 +217,7 @@ definitions:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
           - name
-          - condition
+          - iterator
           - loopBody
   parallelForDef:
     additionalProperties: false
@@ -369,10 +268,8 @@ definitions:
     items:
       anyOf:
         - "$ref": "#/definitions/atomicFunctionDef"
-        - "$ref": "#/definitions/ifThenElseDef"
-        - "$ref": "#/definitions/switchDef"
-        - "$ref": "#/definitions/parallelForDef"
-        - "$ref": "#/definitions/sequentialWhileDef"
+        - "$ref": "#/definitions/ifThenElseDef"        
+        - "$ref": "#/definitions/parallelForDef"        
         - "$ref": "#/definitions/sequentialForDef"
 type: object
 additionalProperties: false
