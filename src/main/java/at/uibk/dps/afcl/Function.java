@@ -19,7 +19,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = AtomicFunction.class, name = "function"),
         @JsonSubTypes.Type(value = IfThenElse.class, name = "if"),
         @JsonSubTypes.Type(value = ParallelFor.class, name = "parallelFor"),
-        @JsonSubTypes.Type(value = Switch.class, name = "switch")
+        @JsonSubTypes.Type(value = SequentialFor.class, name = "sequentialFor")
 })
 public class Function {
 

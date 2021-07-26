@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"name", "dataIns", "iterator", "loopBody", "condition"})
-@JsonTypeName("for")
+@JsonTypeName("sequentialFor")
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class SequentialFor extends LoopCompound {
 
