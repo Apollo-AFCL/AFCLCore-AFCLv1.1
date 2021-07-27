@@ -192,7 +192,7 @@ definitions:
           - name
           - condition
           - then
-  sequentialForDef:
+  whileDef:
     additionalProperties: false
     properties:
       for:
@@ -202,9 +202,7 @@ definitions:
           name:
             type: string
           dataIns:
-            "$ref": "#/definitions/dataInsDef"
-          iterator:
-            "$ref": "#/definitions/iteratorsDef"          
+            "$ref": "#/definitions/dataInsDef"          
           loopBody:
             "$ref": "#/definitions/functionDef"
           condition:
@@ -216,9 +214,9 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-          - name
-          - iterator
+          - name          
           - loopBody
+          - condition
   parallelForDef:
     additionalProperties: false
     properties:
@@ -270,7 +268,7 @@ definitions:
         - "$ref": "#/definitions/atomicFunctionDef"
         - "$ref": "#/definitions/ifThenElseDef"        
         - "$ref": "#/definitions/parallelForDef"        
-        - "$ref": "#/definitions/sequentialForDef"
+        - "$ref": "#/definitions/whileDef"
 type: object
 additionalProperties: false
 properties:

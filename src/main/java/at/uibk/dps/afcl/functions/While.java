@@ -15,16 +15,10 @@ import java.util.Objects;
  * @author stefanpedratscher
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"name", "dataIns", "iterator", "loopBody", "condition"})
-@JsonTypeName("sequentialFor")
+@JsonPropertyOrder({"name", "dataIns", "loopBody", "condition"})
+@JsonTypeName("while")
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
-public class SequentialFor extends LoopCompound {
-
-  /**
-   * Provides the information on the number of sequential executions of the bosy.
-   */
-  @JsonProperty("iterator")
-  protected String iterator;
+public class While extends LoopCompound {
 
   /**
    * Provides the stop condition(s)
@@ -35,7 +29,7 @@ public class SequentialFor extends LoopCompound {
   /**
    * Default constructor.
    */
-  public SequentialFor() {
+  public While() {
     super();
   }
 
@@ -50,7 +44,7 @@ public class SequentialFor extends LoopCompound {
    * @param condition stop condition
    * @param dataOuts Data output ports ({@link DataOuts})
    */
-  public SequentialFor(final String name, final List<DataIns> dataIns, final String iterator,
+  public While(final String name, final List<DataIns> dataIns,
       final List<Function> loopBodySequentialFor, final List<Condition> condition,
       final List<DataOuts> dataOuts) {
     this();
@@ -58,18 +52,7 @@ public class SequentialFor extends LoopCompound {
     this.dataIns = dataIns;
     this.setLoopBody(loopBodySequentialFor);
     this.dataOuts = dataOuts;
-    this.iterator = iterator;
     this.condition = condition;
-  }
-
-  @JsonProperty("iterator")
-  public String getIterator() {
-    return iterator;
-  }
-
-  @JsonProperty("iterator")
-  public void setIterator(String iterator) {
-    this.iterator = iterator;
   }
 
   @JsonProperty("condition")
@@ -93,12 +76,12 @@ public class SequentialFor extends LoopCompound {
     if (!super.equals(object)) {
       return false;
     }
-    final SequentialFor that = (SequentialFor) object;
-    return Objects.equals(condition, that.condition) && Objects.equals(iterator, that.iterator);
+    final While that = (While) object;
+    return Objects.equals(condition, that.condition);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), condition, iterator);
+    return Objects.hash(super.hashCode(), condition);
   }
 }

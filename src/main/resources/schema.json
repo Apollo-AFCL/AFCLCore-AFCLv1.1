@@ -255,7 +255,7 @@
         }
       }
     },
-    "sequentialForDef": {
+    "whileDef": {
       "additionalProperties": false,
       "properties": {
         "for": {
@@ -268,9 +268,6 @@
             "dataIns": {
               "$ref": "#/definitions/dataInsDef"
             },
-            "iterator": {
-              "$ref": "#/definitions/iteratorsDef"
-            },            
             "loopBody": {
               "$ref": "#/definitions/functionDef"
             },
@@ -288,9 +285,9 @@
             }
           },
           "required": [
-            "name",
-            "iterator",
-            "loopBody"
+            "name",            
+            "loopBody",
+            "condition"
           ]
         }
       }
@@ -374,7 +371,7 @@
             "$ref": "#/definitions/parallelForDef"
           },
           {
-            "$ref": "#/definitions/sequentialForDef"
+            "$ref": "#/definitions/whileDef"
           }
         ]
       }

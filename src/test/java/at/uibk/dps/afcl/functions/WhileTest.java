@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author stefanpedratscher
  */
-public class SequentialForTest {
+public class WhileTest {
 
   /**
    * Test full construction of a sequentialFor.
@@ -30,14 +30,13 @@ public class SequentialForTest {
         new AtomicFunction("atomicFunction", "atomicFunctionType", null, null);
     final DataIns dataIns = new DataIns("inName", "inType");
     final DataOuts dataOuts = new DataOuts("outName", "outType", "outSource");
-    final String iterator = "5";
     final List<Condition> condition =
         Arrays.asList(new Condition("1", "2", "number", "==", "AND", false),
             new Condition("1", "1", "number", "==", "AND", false));
 
-    final SequentialFor sequentialFor =
-        new SequentialFor("sequentialFor", new ArrayList<>(Collections.singleton(dataIns)),
-            iterator, new ArrayList<>(Collections.singleton(atomicFunction)), condition,
+    final While sequentialFor =
+        new While("sequentialFor", new ArrayList<>(Collections.singleton(dataIns)),
+            new ArrayList<>(Collections.singleton(atomicFunction)), condition,
             new ArrayList<>(Collections.singleton(dataOuts)));
 
     Assert.assertEquals("sequentialFor", sequentialFor.getName());
@@ -46,7 +45,6 @@ public class SequentialForTest {
     Assert.assertEquals(dataIns, sequentialFor.getDataIns().get(0));
     Assert.assertEquals(dataIns.hashCode(), sequentialFor.getDataIns().get(0).hashCode());
 
-    assertEquals(iterator, sequentialFor.getIterator());
     assertEquals(condition, sequentialFor.getCondition());
 
     Assert.assertEquals(1, sequentialFor.getLoopBody().size());
@@ -67,11 +65,10 @@ public class SequentialForTest {
    */
   @Test
   public void testEmptyConstruction() {
-    final SequentialFor sequentialFor = new SequentialFor();
+    final While sequentialFor = new While();
 
     Assert.assertNull(sequentialFor.getName());
     Assert.assertNull(sequentialFor.getDataIns());
-    Assert.assertNull(sequentialFor.getIterator());
     Assert.assertNull(sequentialFor.getCondition());
     Assert.assertNull(sequentialFor.getLoopBody());
     Assert.assertNull(sequentialFor.getDataOuts());
@@ -85,7 +82,7 @@ public class SequentialForTest {
    */
   @Test
   public void testGetterAndSetter() {
-    new BeanTester().testBean(SequentialFor.class);
+    new BeanTester().testBean(While.class);
   }
 
   /**
@@ -95,7 +92,7 @@ public class SequentialForTest {
    */
   @Test
   public void testHashEquals() {
-    final SequentialFor sequentialFor = new SequentialFor("name", null, null, null, null, null);
+    final While sequentialFor = new While("name", null, null, null, null);
 
     Assert.assertEquals(sequentialFor, sequentialFor);
     Assert.assertEquals(sequentialFor.hashCode(), sequentialFor.hashCode());
@@ -104,21 +101,21 @@ public class SequentialForTest {
     final LoopCompound loopCompound = new LoopCompound();
     Assert.assertNotEquals(sequentialFor, loopCompound);
 
-    final SequentialFor sequentialFor2 = new SequentialFor("name", null, null, null, null, null);
+    final While sequentialFor2 = new While("name", null, null, null, null);
     Assert.assertEquals(sequentialFor, sequentialFor2);
     Assert.assertEquals(sequentialFor.hashCode(), sequentialFor2.hashCode());
     sequentialFor2.setAdditionalProperties("name", "type");
     Assert.assertNotEquals(sequentialFor, sequentialFor2);
 
-    SequentialFor sequentialFor3;
-    sequentialFor3 = new SequentialFor("nameWrong", null, null, null, null, null);
+    While sequentialFor3;
+    sequentialFor3 = new While("nameWrong", null, null, null, null);
     Assert.assertNotEquals(sequentialFor, sequentialFor3);
 
-    sequentialFor3 = new SequentialFor("name",
-        Collections.singletonList(new DataIns("name", "type", "source")), null, null, null, null);
+    sequentialFor3 = new While("name",
+        Collections.singletonList(new DataIns("name", "type", "source")), null, null, null);
     Assert.assertNotEquals(sequentialFor, sequentialFor3);
 
-    sequentialFor3 = new SequentialFor("name", null, null, null, null,
+    sequentialFor3 = new While("name", null, null, null,
         Collections.singletonList(new DataOuts("name", "type", "source")));
     Assert.assertNotEquals(sequentialFor, sequentialFor3);
   }
