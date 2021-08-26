@@ -1,0 +1,15 @@
+---
+name: "workflow"
+workflowBody:
+- function:
+    name: "atomicFunction"
+    type: "atomicFunctionType"
+- parallelFor:
+    name: "parallelFor"
+    iterators:
+    - "10"
+    - "collectionName"
+    loopBody:
+    - function:
+        name: "atomicFunction"
+        type: "atomicFunctionType"

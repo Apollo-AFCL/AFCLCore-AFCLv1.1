@@ -1,6 +1,6 @@
 package at.uibk.dps.afcl.functions.objects;
 
-import at.uibk.dps.afcl.functions.SequentialFor;
+import at.uibk.dps.afcl.functions.While;
 import at.uibk.dps.afcl.functions.SequentialWhile;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * This class describes the data loop ports of
- * a {@link SequentialFor} or
+ * a {@link While} or
  * {@link SequentialWhile}
  * @author stefanpedratscher
  */
