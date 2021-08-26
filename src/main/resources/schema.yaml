@@ -109,25 +109,6 @@ definitions:
     type: array
     items:
       type: string
-  loopCounterDef:
-    type: object
-    additionalProperties: false
-    properties:
-      name:
-        type: string
-      type:
-        type: string
-      from:
-        type: string
-      to:
-        type: string
-      step:
-        type: string
-    required:
-      - name
-      - type
-      - from
-      - to
   atomicFunctionDef:
     additionalProperties: false
     properties:
@@ -202,7 +183,7 @@ definitions:
           name:
             type: string
           dataIns:
-            "$ref": "#/definitions/dataInsDef"          
+            "$ref": "#/definitions/dataInsDef"
           loopBody:
             "$ref": "#/definitions/functionDef"
           condition:
@@ -214,7 +195,7 @@ definitions:
           constraints:
             "$ref": "#/definitions/propertiesConstraintDef"
         required:
-          - name          
+          - name
           - loopBody
           - condition
   parallelForDef:
@@ -266,8 +247,8 @@ definitions:
     items:
       anyOf:
         - "$ref": "#/definitions/atomicFunctionDef"
-        - "$ref": "#/definitions/ifThenElseDef"        
-        - "$ref": "#/definitions/parallelForDef"        
+        - "$ref": "#/definitions/ifThenElseDef"
+        - "$ref": "#/definitions/parallelForDef"
         - "$ref": "#/definitions/whileDef"
 type: object
 additionalProperties: false

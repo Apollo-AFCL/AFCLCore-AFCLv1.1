@@ -1,7 +1,7 @@
 ---
 name: "workflow"
 workflowBody:
-- sequentialFor:
+- while:
     name: "switch"
     dataIns:
     - name: "inName"

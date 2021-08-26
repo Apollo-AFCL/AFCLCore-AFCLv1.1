@@ -38,7 +38,6 @@ public class While extends LoopCompound {
    *
    * @param name Unique identifier of the compound
    * @param dataIns Data input ports ({@link DataIns})
-   * @param iterator information about the number of (sequential) loop iterations
    * @param loopBodySequentialFor functions which should be executed in each
    *        iteration
    * @param condition stop condition

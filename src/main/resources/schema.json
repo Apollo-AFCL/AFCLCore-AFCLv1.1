@@ -133,33 +133,6 @@
         "type": "string"
       }
     },
-    "loopCounterDef": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "from": {
-          "type": "string"
-        },
-        "to": {
-          "type": "string"
-        },
-        "step": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "from",
-        "to"
-      ]
-    },
     "atomicFunctionDef": {
       "additionalProperties": false,
       "properties": {
@@ -258,7 +231,7 @@
     "whileDef": {
       "additionalProperties": false,
       "properties": {
-        "for": {
+        "while": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
